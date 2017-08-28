@@ -47,7 +47,7 @@ class Chain(defaultdict):
             sequence may also be a string, if you wish to index character information
         """
         sequence = list(self.startState) + list(sequence) + list(self.endState)
-        for idx in xrange(self.order, len(sequence)):
+        for idx in range(self.order, len(sequence)):
             self.addNode(sequence[idx-self.order:idx], sequence[idx])
 
     def getNode(self, state):
@@ -86,18 +86,10 @@ class Chain(defaultdict):
 if __name__ == "__main__":
     text = "I sent my representatives a form letter, and all I got back was a form letter. Should I be upset? You would have sent yourself back a form letter. They're just representing you."
 
-    print "    example output using a chain of individual letters:\n"
-    a = Chain(3) # create an empty chain of a given order
-    a.addSequence(text) # this chain will index characters, because we're just passing in a string
+    a = Chain(2) # create an empty chain of a given order.
+    a.addSequence([1,2,3,4,5,4,3,2,1,2,2,3,3,4,5,6])
     seq_a = a.getSequence()    
     out = "    "
     for i in seq_a: out += str(i)
-    print out + "\n\n"
+    print (out + "\n\n")
 
-    print "    example output using a chain of words:\n"
-    b = Chain(2)
-    b.addSequence(text.split()) # this chain will index words, because we're passing it a list of words
-    seq_b = b.getSequence()
-    out = "    "
-    for i in seq_b: out += str(i)+" "
-    print out
